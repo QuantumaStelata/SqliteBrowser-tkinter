@@ -1,7 +1,8 @@
 import tkinter
-from tkinter import filedialog
+from tkinter import PhotoImage, filedialog
 
 import sqlite3
+import sys
 
 import settings as st
 
@@ -22,6 +23,9 @@ class Root(tkinter.Tk):
         self.maxsize(*st.MAX_SIZE)
         self.resizable(*st.ROOT_RESIZABLE)
         self.title(st.ROOT_TITLE)
+
+        if (sys.platform.startswith('win')): 
+            self.iconbitmap('/static/db.ico')
 
 
     def setHotKeys(self, *args, **kwargs):
