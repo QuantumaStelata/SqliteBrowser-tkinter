@@ -1,5 +1,5 @@
 import tkinter
-from tkinter import PhotoImage, filedialog
+from tkinter import filedialog
 
 import sqlite3
 import sys
@@ -49,7 +49,7 @@ class Root(tkinter.Tk):
         self.exit_button = tkinter.Button(self.command_frame, text='Exit', command=lambda: self.destroy())
         self.exit_button.pack(padx=(5, 20), pady=(3,3), side='right')
 
-        self.theme_button = tkinter.Button(self.command_frame, text='Dark theme', command=self.changeTheme)
+        self.theme_button = tkinter.Button(self.command_frame, command=self.changeTheme)
         self.theme_button.pack(padx=(5, 5), pady=(3,3), side='right')
 
     def setInputFrame(self, *args, **kwargs):
@@ -64,7 +64,7 @@ class Root(tkinter.Tk):
         self.output_frame.pack(fill='both', expand=True)
 
         self.output_label = tkinter.Label(self.output_frame, anchor='nw')
-        self.output_label.pack(fill='both', expand=True, side='bottom', padx=(20, 20), pady=(3,5))
+        self.output_label.pack(fill='both', expand=True, side='bottom', padx=(20, 20), pady=(3,10))
 
     def fileOpen(self, *args, **kwargs):      
         dlg = filedialog.Open(self, filetypes = st.FILE_TYPES)
@@ -135,11 +135,11 @@ class Root(tkinter.Tk):
         if st.NOW_LIGHT_THEME:
             self.THEME = st.THEME_LIGHT
             st.NOW_LIGHT_THEME = False
-            self.theme_button.configure(text='Dark theme')
+            self.theme_button.configure(text='\U0001F312')
         else:
             self.THEME = st.THEME_DARK
             st.NOW_LIGHT_THEME = True
-            self.theme_button.configure(text='Light theme')
+            self.theme_button.configure(text='\U0001F316')
         
         self.changeThemeWidget(self.winfo_children())
 
