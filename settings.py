@@ -13,6 +13,7 @@ ROOT_RESIZABLE = (True, True)
 ROOT_TITLE = "SQLite Browser"
 
 RELIEF = 'groove'
+FONT = 'Arial 16'
 
 # Base settings
 DB_NAME = ''
