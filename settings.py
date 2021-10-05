@@ -1,5 +1,5 @@
 # Global settings
-__version__ = '0.3'
+__version__ = '1.0'
 
 # Root settings
 WIDTH = 900
