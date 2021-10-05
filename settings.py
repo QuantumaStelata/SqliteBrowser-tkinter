@@ -23,6 +23,9 @@ FILE_TYPES = [
     ('Все файлы', '*')
 ]
 
+# All windows names
+WINDOWS = ['MAIN', 'DATA']
+
 # Theme
 NOW_LIGHT_THEME = True
 
@@ -34,7 +37,25 @@ THEME_LIGHT = {
     'LABEL': '#FFFFFF',
     'BORDER': '#666666',
     'FG': '#000000',
-    'ERROR': '#FF0000'
+    'ERROR': '#FF0000',
+    'THEME': '\U0001F312',  # Moon Emoji for theme_button
+    'COMBOBOX': {
+        'BACKGROUND': '#FFFFFF',
+        'FOREGROUND': '#000000',
+        'SBACKGROUND': '#CFCFCF',
+        'SFOREGROUND': '#000000',
+        'SETTINGS': {
+            'TCombobox': {
+                'configure': {
+                    'selectbackground': '#FFFFFF',
+                    'selectforeground': '#000000',
+                    'fieldbackground': '#FFFFFF',
+                    'background': '#B0B0B0',
+                    'foreground': '#000000',
+                }
+            }
+        }
+    }
 }
 
 THEME_DARK = {
@@ -45,5 +66,23 @@ THEME_DARK = {
     'LABEL': '#444444',
     'BORDER': '#555555',
     'FG': '#FFFFFF',
-    'ERROR': '#FF0000'
+    'ERROR': '#FF0000',
+    'THEME': '\U0001F316',  # Sun Emoji for theme_button
+    'COMBOBOX': {
+        'BACKGROUND': '#444444',
+        'FOREGROUND': '#FFFFFF',
+        'SBACKGROUND': '#666666',
+        'SFOREGROUND': '#FFFFFF',
+        'SETTINGS': {
+            'TCombobox': {
+                'configure': {
+                    'selectbackground': '#444444',
+                    'selectforeground': '#FFFFFF',
+                    'fieldbackground': '#444444',
+                    'background': '#444444',
+                    'foreground': '#FFFFFF',
+                }
+            }
+        }
+    }
 }
