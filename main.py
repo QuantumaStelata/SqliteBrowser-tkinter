@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import tkinter
 from tkinter import filedialog
 
@@ -16,6 +17,7 @@ class Root(tkinter.Tk):
         self.setOutputFrame()
         self.setHotKeys()
         self.changeTheme()
+
 
     def guiSettings(self, *args, **kwargs):
         self.geometry(f"{st.WIDTH}x{st.HEIGHT}+{(self.winfo_screenwidth() - st.WIDTH) // 2}+{(self.winfo_screenheight() - st.HEIGHT) // 2}")
@@ -46,11 +48,15 @@ class Root(tkinter.Tk):
         self.run_button = tkinter.Button(self.command_frame, text='Run', command=self.runSql)
         self.run_button.pack(padx=(5, 5), pady=(3,3), side='left')
 
+        self.create_db = tkinter.Button(self.command_frame, text='Create DB', command=self.createDB)
+        self.create_db.pack(padx=(5, 5), pady=(3,3), side='left')
+
         self.exit_button = tkinter.Button(self.command_frame, text='Exit', command=lambda: self.destroy())
         self.exit_button.pack(padx=(5, 20), pady=(3,3), side='right')
 
         self.theme_button = tkinter.Button(self.command_frame, command=self.changeTheme)
         self.theme_button.pack(padx=(5, 5), pady=(3,3), side='right')
+
 
     def setInputFrame(self, *args, **kwargs):
         self.input_frame = tkinter.Frame(self)
@@ -59,12 +65,18 @@ class Root(tkinter.Tk):
         self.input_sql = tkinter.Text(self.input_frame, width=0, height=0)
         self.input_sql.pack(fill='both', expand=True, padx=(20, 20), pady=(3,3), ipady=100)
 
+
     def setOutputFrame(self, *args, **kwargs):
         self.output_frame = tkinter.Frame(self)
         self.output_frame.pack(fill='both', expand=True)
 
         self.output_label = tkinter.Label(self.output_frame, anchor='nw')
         self.output_label.pack(fill='both', expand=True, side='bottom', padx=(20, 20), pady=(3,10))
+
+        # self.myscroll = tkinter.Scrollbar(self.output_la )
+        # self.myscroll.pack( side = 'right', fill = 'y' )
+
+
 
     def fileOpen(self, *args, **kwargs):      
         dlg = filedialog.Open(self, filetypes = st.FILE_TYPES)
@@ -103,7 +115,6 @@ class Root(tkinter.Tk):
             res.grid(column=0, row=0)
 
         
-
     def conn(self, request, *args, **kwargs):
         if not st.DB_NAME:
             tkinter.messagebox.showerror(title='Error', message='Database not connected')
@@ -125,6 +136,7 @@ class Root(tkinter.Tk):
 
         self.cursor.close()
         return response, response_col
+
 
     def delOutputFrameChild(self, *args, **kwargs):
         for child in self.output_label.winfo_children():
@@ -159,11 +171,20 @@ class Root(tkinter.Tk):
             if child.winfo_children():
                 self.changeThemeWidget(child.winfo_children())
 
+
     def selectAll(self, *args, **kwargs):
         self.input_sql.tag_add('sel', "1.0", 'end')
         self.input_sql.mark_set('insert', "1.0")
         self.input_sql.see('insert')
 
+
+    def createDB(self, *args, **kwargs):
+        st.DB_NAME = 'base.db'
+        self.cursor = sqlite3.connect(st.DB_NAME, isolation_level=None).cursor()
+        self.cursor.close()
+        self.delOutputFrameChild()
+        res = tkinter.Label(self.output_label, text='Created base.db', font=st.FONT, bg=self.THEME['LABEL'], fg=self.THEME['FG'])
+        res.grid(column=0, row=0)
         
 
 root = Root()
