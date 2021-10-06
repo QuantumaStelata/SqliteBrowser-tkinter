@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from sqlite3.dbapi2 import ProgrammingError
 import tkinter
 from tkinter import ttk
 from tkinter import filedialog
@@ -113,7 +114,10 @@ class Root(tkinter.Tk):
     def fileOpen(self, *args, **kwargs): 
         '''The dialog window for found and connect to database'''     
         dlg = filedialog.Open(self, filetypes = st.FILE_TYPES)
-        st.DB_NAME = dlg.show()
+        _dir = dlg.show()
+        
+        if not st.DB_NAME:
+            st.DB_NAME = _dir
 
 
     def runSql(self, *args, **kwargs):
